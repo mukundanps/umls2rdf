@@ -8,7 +8,7 @@ import glob
 import pdb
 import shutil
 
-REPO = "/srv/ncbo/repository"
+REPO = "/srv/repository"
 OUTPUT = "./output"
 
 ttl_files = glob.glob("%s/*.ttl"%(OUTPUT))
@@ -26,7 +26,7 @@ for acronym in file_map:
         latest = 0
         latest_subdir = None
         for sub_dir in sub_dirs:
-            s = sub_dir.split("/")[-1] 
+            s = sub_dir.split("/")[-1]
             try:
                 i = int(s)
                 if i > latest:
@@ -43,4 +43,3 @@ for acronym in file_map:
                 print "ttl file not found for " + acronym
     else:
         print "NOT Found " + dir_ont
-
