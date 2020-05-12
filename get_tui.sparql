@@ -1,0 +1,27 @@
+PREFIX umls: <http://bioportal.bioontology.org/ontologies/umls/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX sty: <http://data.bioontology.org/ontologies/UMLSSTY/>
+
+SELECT DISTINCT ?cui ?label
+FROM NAMED <http://localhost:3030/umls/snomed>
+FROM NAMED <http://localhost:3030/umls/icd10>
+FROM NAMED <http://localhost:3030/umls/loinc>
+FROM NAMED <http://localhost:3030/umls/rxnorm>
+FROM NAMED <http://localhost:3030/umls/semantictypes>
+FROM NAMED <http://localhost:3030/umls/hl7>
+
+WHERE { GRAPH ?g {
+    {
+      ?concept umls:hasSTY sty:<TUI> ;
+        skos:prefLabel ?label;
+        umls:cui ?cui;
+        umls:tui ?tui .
+
+    }  UNION {
+      ?concept umls:hasSTY sty:<TUI> ;
+        skos:altLabel ?label;
+        umls:cui ?cui;
+        umls:tui ?tui .
+    }
+    }
+}
